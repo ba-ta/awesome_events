@@ -1,0 +1,18 @@
+.page_header
+  h1 退会の確認
+
+- if current_user.errors.any?
+  .alert.alert-danger
+    ul
+      - current_iser.errors.full_messages.each do |msg|
+        li = msg
+
+p 退会した場合、ユーザに関するデータが全て削除されます。
+p ただし、以下の場合は退会できません。
+ul
+  li 公開中の未終了のイベントが有る
+  li 未終了の参加イベントがある場合
+
+hr
+
+= link_to '退会する', user_path, method: :delete, class: 'btn btn-danger'

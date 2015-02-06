@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang='en' xml:lang='en' xmlns='http://www.w3.org/1999/xhtml'>
+  <head>
+    <title>app/models/user.rb</title>
+    <link href="./assets/0.2.3/screen.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="./assets/0.2.3/print.css" media="print" rel="stylesheet" type="text/css" />
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+    <script type="text/javascript" src="./assets/0.2.3/rcov.js"></script>
+  </head>
+  <body>
+    <h1>Awesome events C0 Coverage Information - Simploco - RCov</h1>
+    <h2>app/models/user.rb</h2>
+
+    <div class="report_table_wrapper">
+      <table class='report' id='report_table'>
+        <thead>
+          <tr>
+            <th class="left_align">Name</th>
+            <th class="right_align">Total Lines</th>
+            <th class="right_align">Lines of Code</th>
+            <th class="left_align">Total Coverage</th>
+            <th class="left_align">Code Coverage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="left_align"><a href="app-models-user_rb.html">app/models/user.rb</a></td>
+            <td class='right_align'><tt>33</tt></td>
+            <td class='right_align'><tt>21</tt></td>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>81.82%</tt></div>
+      <div class="percent_graph">
+        <div class="covered" style="width:82px"></div>
+        <div class="uncovered" style="width:18px"></div>
+      </div></td>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>71.43%</tt></div>
+      <div class="percent_graph">
+        <div class="covered" style="width:71px"></div>
+        <div class="uncovered" style="width:29px"></div>
+      </div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Key</h3>
+
+    <div class="key"><pre><span class='marked'>Code reported as executed by Ruby looks like this...</span><span class='marked1'>and this: this line is also marked as covered.</span><span class='inferred'>Lines considered as run by rcov, but not reported by Ruby, look like this,</span><span class='inferred1'>and this: these lines were inferred by rcov (using simple heuristics).</span><span class='uncovered'>Finally, here's a line marked as not executed.</span></pre></div>
+
+    <h3>Coverage Details</h3>
+
+    <table class="details">
+      <tbody>
+        <tr class="marked">
+          <td><pre><a name="line2">2</a> class User &lt; ActiveRecord::Base</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line3">3</a>   before_destroy :check_all_events_finished</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line4">4</a> </pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line5">5</a>   has_many :created_events, class_name: &#39;Event&#39;, foreign_key: :owner_id, dependent: :nullify</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line6">6</a>   has_many :tickets, dependent: :nullify</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line7">7</a>   has_many :participating_events, through: :tickets, source: :event</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line8">8</a>   </pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line9">9</a>   def self.find_or_create_from_auth_hash(auth_hash)</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line10">10</a>     provider  = auth_hash[:provider]</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line11">11</a>     uid       = auth_hash[:uid]</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line12">12</a>     nickname  = auth_hash[:info][:nickname]</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line13">13</a>     image_url = auth_hash[:info][:image]</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line14">14</a> </pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line15">15</a>     User.find_or_create_by(provider: provider, uid: uid) do |user|</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line16">16</a>       user.nickname  = nickname</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line17">17</a>       user.image_url = image_url</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line18">18</a>     end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line19">19</a>   end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line20">20</a> </pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line21">21</a>   private</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line22">22</a> </pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line23">23</a>   def check_all_events_finished</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line24">24</a>     now = Time.zone.now</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line25">25</a>     if created_events.where(&#39;:now &lt; end_time&#39;, now: now).exists?</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line26">26</a>       errors[:base] &lt;&lt; &#39;公開中の未終了イベントが存在します&#39;</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line27">27</a>     end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line28">28</a> </pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line29">29</a>     if participating_events.where(&#39;:now &lt; end_time&#39;, now: now).exists?</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line30">30</a>       errors[:base] &lt;&lt; &#39;未終了の参加イベントが存在します&#39;</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line31">31</a>     end</pre></td>
+        </tr>
+        <tr class="uncovered">
+          <td><pre><a name="line32">32</a>     errors.blank?</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line33">33</a>   end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line34">34</a> end</pre></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Generated on 2015-01-20 10:00:39 +0900 with <a href="https://github.com/fguillen/simplecov-rcov">SimpleCov-RCov 0.2.3</a></p>
+
+  </body>
+</html>
