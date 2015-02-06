@@ -39,6 +39,15 @@ set :default_env, {
   path: "/usr/local/rbenv/shims:/usr/local/rbenv/bin:$PATH"
 }
 
+# 共有ディレクトリにSymlinkする対象を追加
+set :linked_dirs, (fetch(:linked_dirs) + ['tmp/pids'])
+
+# Unicorn周りの設定をする
+set :unicorn_rake_env, "none"
+set :unicorn_config_path, 'config/unicorn.rb'
+
+after 'deploy:publishing', 'deploy:restart'
+
 namespace :deploy do
 
   desc 'Restart application'
@@ -47,6 +56,8 @@ namespace :deploy do
       # Your restart mechanism here, for example:
       # execute :touch, release_path.join('tmp/restart.txt')
     end
+
+    invoke 'unicorn:restart'
   end
 
   after :publishing, :restart
